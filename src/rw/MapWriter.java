@@ -1,7 +1,7 @@
 package rw;
 
 import com.google.common.collect.Multimap;
-import configoration.Globals;
+import configuration.Globals;
 import logic.NameLocation;
 
 import java.io.IOException;
@@ -13,6 +13,12 @@ import java.nio.file.StandardOpenOption;
  * Created by dvir arad on 11/29/17.
  */
 public class MapWriter {
+    /**
+     * Responsible of serialization map to file
+     */
+    public MapWriter(){
+
+    }
 
     public void writeMapFromMatcher(Multimap<String, NameLocation> nameLocationMap) {
         writeMap(nameLocationMap,Globals.MAP_PATH);
@@ -22,7 +28,11 @@ public class MapWriter {
         writeMap(nameLocationMap,Globals.MAP_SUMMARY_PATH);
     }
 
-
+    /**
+     * serialization map to file
+     * @param nameLocationMap Map
+     * @param path -location of file
+     */
     public synchronized void writeMap(Multimap<String, NameLocation> nameLocationMap, String path){
 
         try {

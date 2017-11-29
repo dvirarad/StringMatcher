@@ -1,7 +1,8 @@
 package logic;
 
 import com.google.common.base.Stopwatch;
-import configoration.Globals;
+import com.google.common.collect.Multimap;
+import configuration.Globals;
 import rw.MapReader;
 import rw.MapWriter;
 import rw.ReaderChunk;
@@ -12,31 +13,46 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by dvira on 11/29/17.
+ * Created by dvir arad on 11/29/17.
  */
 public class Manager {
+
     List<Thread> runnableList;
     ReaderChunk reader;
     MapWriter mapWriter;
     List<String> nameList;
     final Stopwatch stopwatch = Stopwatch.createStarted();
 
+    /**
+     *  Manages the Thread, Reader, Writer and creates a summarizing document
+     */
     public Manager(){
         System.out.println("Start Manager");
         runnableList = new ArrayList<>(Globals.NUMBER_OF_THREAD);
         reader = new ReaderChunk(Globals.WEB_ADDRESS);
         mapWriter = new MapWriter();
         nameList = new ArrayList(Arrays.asList(Globals.NAME_LIST));
-
-
     }
 
+    /**
+     * Read map from File
+     * Write Map to Summary File
+     */
     public void writeSummary() {
-        MapReader mapReader = new MapReader();
-        mapReader.loadMapFromFile();
-        mapWriter.writeMapSummary(mapReader.getNameLocationMap());
+        Multimap<String, NameLocation> nameLocationMap = getNameLocationMap();
+        mapWriter.writeMapSummary(nameLocationMap);
         System.out.println("Done Job");
         System.out.println("Time pass:" + stopwatch.elapsed(TimeUnit.SECONDS));
+    }
+
+    /**
+     * Read map from File(file path location at configuration )
+     * @return Map of key name and locations
+     */
+    public Multimap<String, NameLocation> getNameLocationMap() {
+        MapReader mapReader = new MapReader();
+        mapReader.loadMapFromFile();
+        return mapReader.getNameLocationMap();
     }
 
     public void startThreadMatcher() {

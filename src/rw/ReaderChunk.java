@@ -1,6 +1,6 @@
 package rw;
 
-import configoration.Globals;
+import configuration.Globals;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,6 +23,11 @@ private int defaultChunkSize;
         this(webAddress, Globals.DEFAULT_CHUNK_SIZE);
     }
 
+    /**
+     * Responsible of reading text from web address
+     * @param webAddress  address of web to read from
+     * @param defaultChunkSize - amount of rows read each time
+     */
     public ReaderChunk(String webAddress, int defaultChunkSize){
         this.defaultChunkSize = defaultChunkSize;
         try {
@@ -40,6 +45,11 @@ private int defaultChunkSize;
         return readLines(this.defaultChunkSize);
     }
 
+    /**
+     * Read text
+     * @param chunksSize amount of rows to read
+     * @return Chunk of rows from original text
+     */
     private synchronized Optional<LinesPacket> readLines(int chunksSize){
         StringBuilder stringBuilder = new StringBuilder();
         String inputLine;
@@ -58,13 +68,6 @@ private int defaultChunkSize;
             return Optional.ofNullable(lp); // Safe from NullPointerException
 
         }
-
-
-
-//            if (lineOffset < 800)
-//                return Optional.of(new LinesPacket(stringBuilder, lineOffset));
-//            else
-//                return Optional.ofNullable(null); // Safe from NullPointerException
     }
 
 

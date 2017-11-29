@@ -1,9 +1,13 @@
-import configoration.Globals;
+import configuration.Globals;
 import logic.Manager;
 
 
 /**
- * Created by dvir arad on 11/29/17.
+ * Created by Dvir Arad on 11/29/17.
+ *
+ * The Project responsibility is to find specific strings in a large text.
+ *
+ * System configuration located at configuration/Globals.java
  */
 public class Main {
     public static void main(String[] args) {

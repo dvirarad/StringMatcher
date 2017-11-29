@@ -1,10 +1,7 @@
-package configoration;
-
-import java.util.ArrayList;
-import java.util.List;
+package configuration;
 
 /**
- * Created by dvira on 11/29/17.
+ * Created by dvir arad on 11/29/17.
  */
 public class Globals {
 
@@ -25,6 +22,4 @@ public class Globals {
     public static final int NUMBER_OF_THREAD = 10;
     public static final int DEFAULT_CHUNK_SIZE= 1000;
 
-    public class MAP_SUMMARY {
-    }
 }

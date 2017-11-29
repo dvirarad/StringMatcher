@@ -6,7 +6,7 @@ import org.junit.Test;
 import rw.MapReader;
 
 /**
- * Created by dvira on 11/29/17.
+ * Created by dvir arad on 11/29/17.
  */
 public class MapReaderTest {
 

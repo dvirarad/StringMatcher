@@ -2,11 +2,10 @@ package rw;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import configoration.Globals;
+import configuration.Globals;
 import logic.NameLocation;
 
 import java.io.*;
-import java.nio.file.Files;
 
 /**
  * Created by dvir arad on 11/29/17.
@@ -21,9 +20,13 @@ public class MapReader {
         this(Globals.MAP_PATH);
     }
 
-    public MapReader(String path) {
+    /**
+     * Responsible of deserialization map from file
+     * @param fileLocation - location of file to read from
+     */
+    public MapReader(String fileLocation) {
         try {
-            File file = new File(path);
+            File file = new File(fileLocation);
             if(!file.exists())
                 file.createNewFile();
             fr = new FileReader(file);
@@ -36,6 +39,9 @@ public class MapReader {
         }
     }
 
+    /**
+     * Deserialization map from file
+     */
     public void loadMapFromFile(){
         String line;
         while ((line = getLine()) != null)
@@ -44,16 +50,23 @@ public class MapReader {
         close();
     }
 
-
+    /**
+     * Deserialization line into <String,NameLocation> entity
+     * @param line - one line from file
+     */
     public void parseLine(String line) {
         String[] mapLine = line.split(Globals.DATA_SEPARATOR);
         String key = mapLine[0];
         String row = mapLine[1];
-//        row = row.replace("[", "").replace("]", "");
         String[] nameLocationAsStringArray = row.split("],");
         updateMap(key, nameLocationAsStringArray);
     }
 
+    /**
+     * Add new NameLocation into Key value at Map
+     * @param key
+     * @param nameLocationAsStringArray
+     */
     public void updateMap(String key, String[] nameLocationAsStringArray) {
         for (String nameLocationString : nameLocationAsStringArray) {
             nameLocationString = cleanNameLocationString(nameLocationString);
@@ -62,11 +75,17 @@ public class MapReader {
         }
     }
 
+
     public String cleanNameLocationString(String nameLocationString) {
         nameLocationString = nameLocationString.replace("[", "").replace("]", "");
         return nameLocationString;
     }
 
+    /**
+     * parse String into NameLocation object
+     * @param nameLocationString String to parse
+     * @return  NameLocation object
+     */
     public NameLocation getNameLocation(String nameLocationString) {
         String[] nameLocationArray = nameLocationString.split(Globals.NAME_LOCATION_SEPARATOR);
         String[] arrLineOffset=nameLocationArray[0].split("=");
@@ -96,7 +115,10 @@ public class MapReader {
         }
     }
 
-
+    /**
+     * Responsible of loading line from File
+     * @return One line from file
+     */
     public String getLine() {
         String line = null;
         try {

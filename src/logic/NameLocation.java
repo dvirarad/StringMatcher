@@ -1,18 +1,21 @@
 package logic;
 
-import configoration.Globals;
-
 /**
- * Created by dvira on 11/28/17.
+ * Created by dvir arad on 11/29/17.
  */
 public class NameLocation {
 
     int lineOffset;
     int charOffset;
 
-    public NameLocation(int lineNumber, int charNumber) {
-        this.lineOffset = lineNumber;
-        this.charOffset = charNumber;
+    /**
+     * Represent location in text
+     * @param lineOffset - line offset from the beginning of text
+     * @param charOffset - char starting place at the current offset
+     */
+    public NameLocation(int lineOffset, int charOffset) {
+        this.lineOffset = lineOffset;
+        this.charOffset = charOffset;
     }
 
     public int getLineOffset() {

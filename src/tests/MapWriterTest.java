@@ -7,7 +7,7 @@ import org.junit.Test;
 import rw.MapWriter;
 
 /**
- * Created by dvira on 11/28/17.
+ * Created by dvir arad on 11/29/17.
  */
 public class MapWriterTest {
     Multimap<String,NameLocation> nameLocationHashMap;
