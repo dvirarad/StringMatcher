@@ -14,10 +14,10 @@ public class Globals {
     public static final String WEB_ADDRESS = "http://norvig.com/big.txt";
 
     public static final String[] NAME_LIST = {"James","John","Robert","Michael","William","David","Richard","Charles",
-            "Joseph","Thomas","Christopher","Daniel","Paul","Mark","Donal d","George","Kenneth","Steven","Edward",
+            "Joseph","Thomas","Christopher","Daniel","Paul","Mark","Donald","George","Kenneth","Steven","Edward",
             "Brian","Ronald","Anthony","Kevin","Jason","Matthew","Gary","Timothy","Jose","Larry","Jeffrey"," Frank",
             "Scott","Eric","Stephen","Andrew","Raymond","Gregory","Joshua","Jerry","Dennis","Walter","Patrick","Peter",
-            "Harold","Douglas","H enry","Carl","Arthur","Ryan","Roger"};
+            "Harold","Douglas","Henry","Carl","Arthur","Ryan","Roger"};
 
     public static final int NUMBER_OF_THREAD = 10;
     public static final int DEFAULT_CHUNK_SIZE= 1000;
