@@ -9,7 +9,7 @@ import java.util.List;
 public class Globals {
 
     public static final String DATA_SEPARATOR = "-->";
-    public static final String NAME_LOCATION_SEPARATOR = "@@";
+    public static final String NAME_LOCATION_SEPARATOR = ",";
 
     public static final String MAP_PATH = "data.text";
     public static final String MAP_SUMMARY_PATH = "summary.text";

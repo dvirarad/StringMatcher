@@ -49,23 +49,31 @@ public class MapReader {
         String[] mapLine = line.split(Globals.DATA_SEPARATOR);
         String key = mapLine[0];
         String row = mapLine[1];
-        row = row.replace("[", "").replace("]", "");
-        String[] nameLocationAsStringArray = row.split(",");
+//        row = row.replace("[", "").replace("]", "");
+        String[] nameLocationAsStringArray = row.split("],");
         updateMap(key, nameLocationAsStringArray);
     }
 
     public void updateMap(String key, String[] nameLocationAsStringArray) {
         for (String nameLocationString : nameLocationAsStringArray) {
+            nameLocationString = cleanNameLocationString(nameLocationString);
             NameLocation nameLocation = getNameLocation(nameLocationString);
             nameLocationMap.put(key,nameLocation);
         }
     }
 
+    public String cleanNameLocationString(String nameLocationString) {
+        nameLocationString = nameLocationString.replace("[", "").replace("]", "");
+        return nameLocationString;
+    }
+
     public NameLocation getNameLocation(String nameLocationString) {
         String[] nameLocationArray = nameLocationString.split(Globals.NAME_LOCATION_SEPARATOR);
-        int lineNumber = Integer.valueOf(nameLocationArray[0].trim());
-        int charNumber = Integer.valueOf(nameLocationArray[1].trim());
-        return new NameLocation(lineNumber,charNumber);
+        String[] arrLineOffset=nameLocationArray[0].split("=");
+        String[] arrCharOffset=nameLocationArray[1].split("=");;
+        int lineOffset = Integer.valueOf(arrLineOffset[1].trim());
+        int charOffset = Integer.valueOf(arrCharOffset[1].trim());
+        return new NameLocation(lineOffset,charOffset);
     }
 
     public Multimap<String, NameLocation> getNameLocationMap() {

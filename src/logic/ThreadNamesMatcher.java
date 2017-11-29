@@ -52,7 +52,7 @@ public class ThreadNamesMatcher implements Runnable {
 
     private void findNameInText(LinesPacket lp, StringBuilder stringBuilder, String name) {
         for (int i = -1; (i = stringBuilder.indexOf(name, i + 1)) != -1; i++) {
-            nameLocationHashMap.put(name,new NameLocation(lp.linesCounter,i));
+            nameLocationHashMap.put(name,new NameLocation(lp.lineOffset,i));
         }
     }
 }

@@ -5,10 +5,10 @@ package rw;
  */
 public class LinesPacket {
     public StringBuilder stringBuilder;
-    public int linesCounter;
+    public int lineOffset;
 
-    public LinesPacket(StringBuilder stringBuilder, int linesCounter) {
+    public LinesPacket(StringBuilder stringBuilder, int lineOffset) {
         this.stringBuilder = stringBuilder;
-        this.linesCounter = linesCounter;
+        this.lineOffset = lineOffset;
     }
 }

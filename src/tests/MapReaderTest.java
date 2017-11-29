@@ -1,8 +1,5 @@
 package tests;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
-import com.sun.org.apache.bcel.internal.classfile.LineNumber;
 import logic.NameLocation;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,17 +19,17 @@ public class MapReaderTest {
 
     @Test
     public void testParseLineMapSize(){
-        String line = "Thomas-->[13000@@2665, 13000@@4302, 13000@@52028]\n";
+        String line = "John-->[[lineOffset=13000,charOffset=1755], [lineOffset=13000,charOffset=7741], [lineOffset=13000,charOffset=10844]\n";
         mapReader.parseLine(line);
-        assert mapReader.getNameLocationMap().get("Thomas").size() == 3;
+        assert mapReader.getNameLocationMap().get("John").size() == 3;
     }
 
     @Test
     public void testParseLineMapInfo(){
-        String line = "Thomas-->[13000@@2665]\n";
+        String line = "John-->[[lineOffset=13000,charOffset=1755]\n";
         mapReader.parseLine(line);
-         NameLocation nameLocation = (NameLocation) mapReader.getNameLocationMap().get("Thomas").toArray()[0];
-         assert nameLocation.getLineNumber() == 13000;
-         assert nameLocation.getCharNumber() == 2665;
+         NameLocation nameLocation = (NameLocation) mapReader.getNameLocationMap().get("John").toArray()[0];
+         assert nameLocation.getLineOffset() == 13000;
+         assert nameLocation.getCharOffset() == 1755;
     }
 }

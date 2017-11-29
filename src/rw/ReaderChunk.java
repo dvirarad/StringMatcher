@@ -61,8 +61,8 @@ private int defaultChunkSize;
 
 
 
-//            if (linesCounter < 800)
-//                return Optional.of(new LinesPacket(stringBuilder, linesCounter));
+//            if (lineOffset < 800)
+//                return Optional.of(new LinesPacket(stringBuilder, lineOffset));
 //            else
 //                return Optional.ofNullable(null); // Safe from NullPointerException
     }

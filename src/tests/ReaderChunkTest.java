@@ -22,7 +22,7 @@ public class ReaderChunkTest {
     @Test
     public void readOneChunk(){
         LinesPacket lp = reader.readLines().get();
-        assert lp.linesCounter == 1;
+        assert lp.lineOffset == 0;
         assert lp.stringBuilder.toString().equals("The Project Gutenberg EBook of The Adventures of Sherlock Holmes") ;
     }
 
@@ -30,7 +30,7 @@ public class ReaderChunkTest {
     public void readTwoChunk(){
         reader.readLines();
         LinesPacket lp = reader.readLines().get();
-        assert lp.linesCounter == 2;
+        assert lp.lineOffset == 1;
         assert lp.stringBuilder.toString().equals("by Sir Arthur Conan Doyle") ;
     }
 
@@ -41,7 +41,7 @@ public class ReaderChunkTest {
         reader.readLines();
         reader.readLines();
         LinesPacket lp = reader.readLines().get();
-        assert lp.linesCounter == 5;
+        assert lp.lineOffset == 4;
         assert lp.stringBuilder.toString().equals("Copyright laws are changing all over the world. Be sure to check the");
     }
 
