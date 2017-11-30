@@ -85,4 +85,9 @@ public class Manager {
     }
 
 
+    public void start() {
+        createMatcher(Globals.NUMBER_OF_THREAD);
+        startThreadMatcher();
+        writeSummary();
+    }
 }
