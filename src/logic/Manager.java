@@ -20,7 +20,7 @@ public class Manager {
     List<Thread> runnableList;
     ReaderChunk reader;
     MapWriter mapWriter;
-    List<String> nameList;
+    List<String> listKeyToFind;
     final Stopwatch stopwatch = Stopwatch.createStarted();
 
     /**
@@ -31,7 +31,7 @@ public class Manager {
         runnableList = new ArrayList<>(Globals.NUMBER_OF_THREAD);
         reader = new ReaderChunk(Globals.WEB_ADDRESS);
         mapWriter = new MapWriter();
-        nameList = new ArrayList(Arrays.asList(Globals.NAME_LIST));
+        listKeyToFind = new ArrayList(Arrays.asList(Globals.NAME_LIST));
     }
 
     /**
@@ -39,20 +39,20 @@ public class Manager {
      * Write Map to Summary File
      */
     public void writeSummary() {
-        Multimap<String, NameLocation> nameLocationMap = getNameLocationMap();
-        mapWriter.writeMapSummary(nameLocationMap);
+        Multimap<String, KeyLocation> keyLocationMap = getKeyLocationMap();
+        mapWriter.writeMapSummary(keyLocationMap);
         System.out.println("Done Job");
         System.out.println("Time pass:" + stopwatch.elapsed(TimeUnit.SECONDS));
     }
 
     /**
      * Read map from File(file path location at configuration )
-     * @return Map of key name and locations
+     * @return Map of key and locations
      */
-    public Multimap<String, NameLocation> getNameLocationMap() {
+    public Multimap<String, KeyLocation> getKeyLocationMap() {
         MapReader mapReader = new MapReader();
         mapReader.loadMapFromFile();
-        return mapReader.getNameLocationMap();
+        return mapReader.getKeyLocationMap();
     }
 
     public void startThreadMatcher() {
@@ -80,7 +80,7 @@ public class Manager {
 
     public void createMatcher(int amountOfThread) {
         for (int i = 0; i <amountOfThread; i++) {
-            runnableList.add(new Thread(new ThreadNamesMatcher(reader,mapWriter,nameList), "Thread: " + (i + 1)));
+            runnableList.add(new Thread(new ThreadMatcher(reader,mapWriter, listKeyToFind), "Thread: " + (i + 1)));
         }
     }
 

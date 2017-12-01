@@ -3,7 +3,7 @@ package logic;
 /**
  * Created by dvir arad on 11/29/17.
  */
-public class NameLocation {
+public class KeyLocation {
 
     int lineOffset;
     int charOffset;
@@ -13,7 +13,7 @@ public class NameLocation {
      * @param lineOffset - line offset from the beginning of text
      * @param charOffset - char starting place at the current offset
      */
-    public NameLocation(int lineOffset, int charOffset) {
+    public KeyLocation(int lineOffset, int charOffset) {
         this.lineOffset = lineOffset;
         this.charOffset = charOffset;
     }

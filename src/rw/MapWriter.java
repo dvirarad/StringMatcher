@@ -2,7 +2,7 @@ package rw;
 
 import com.google.common.collect.Multimap;
 import configuration.Globals;
-import logic.NameLocation;
+import logic.KeyLocation;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,11 +20,11 @@ public class MapWriter {
 
     }
 
-    public void writeMapFromMatcher(Multimap<String, NameLocation> nameLocationMap) {
+    public void writeMapFromMatcher(Multimap<String, KeyLocation> nameLocationMap) {
         writeMap(nameLocationMap,Globals.MAP_PATH);
     }
 
-    public void writeMapSummary(Multimap<String, NameLocation> nameLocationMap) {
+    public void writeMapSummary(Multimap<String, KeyLocation> nameLocationMap) {
         writeMap(nameLocationMap,Globals.MAP_SUMMARY_PATH);
     }
 
@@ -33,7 +33,7 @@ public class MapWriter {
      * @param nameLocationMap Map
      * @param path -location of file
      */
-    public synchronized void writeMap(Multimap<String, NameLocation> nameLocationMap, String path){
+    public synchronized void writeMap(Multimap<String, KeyLocation> nameLocationMap, String path){
 
         try {
             Files.write(Paths.get(path), () -> nameLocationMap.asMap().entrySet().stream()

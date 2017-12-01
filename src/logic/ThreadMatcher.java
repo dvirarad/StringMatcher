@@ -12,23 +12,23 @@ import java.util.Optional;
 /**
  * Created by dvir arad on 11/29/17.
  */
-public class ThreadNamesMatcher implements Runnable {
+public class ThreadMatcher implements Runnable {
 
     ReaderChunk reader;
-    MapWriter writerHashMap;
-    List<String> namesToFind;
-    Multimap<String,NameLocation> nameLocationHashMap;
+    MapWriter mapWriter;
+    List<String> listKeyToFind;
+    Multimap<String, KeyLocation> keyLocationMap;
 
     /**
      * Responsible for finding a key in the text
      * @param reader Text holder
      * @param mapWriter - Writer of map
-     * @param namesToFind List of Key to find at text
+     * @param keysToFind List of Key to find at text
      */
-    public ThreadNamesMatcher(ReaderChunk reader, MapWriter mapWriter, List<String> namesToFind) {
+    public ThreadMatcher(ReaderChunk reader, MapWriter mapWriter, List<String> keysToFind) {
         this.reader = reader;
-        this.writerHashMap = mapWriter;
-        this.namesToFind = namesToFind;
+        this.mapWriter = mapWriter;
+        this.listKeyToFind = keysToFind;
     }
 
     @Override
@@ -46,14 +46,14 @@ public class ThreadNamesMatcher implements Runnable {
      * create new Map
      */
     private void initMap() {
-        this.nameLocationHashMap = ArrayListMultimap.create();
+        this.keyLocationMap = ArrayListMultimap.create();
     }
 
     /**
      *  Write task map result
      */
     private void writeMap() {
-        writerHashMap.writeMapFromMatcher(nameLocationHashMap);
+        mapWriter.writeMapFromMatcher(keyLocationMap);
     }
 
     /**
@@ -62,14 +62,14 @@ public class ThreadNamesMatcher implements Runnable {
      */
     private void processPacket(LinesPacket lp) {
         StringBuilder stringBuilder = lp.stringBuilder;
-        for (String name : namesToFind) {
-            findNameInText(lp, stringBuilder, name);
+        for (String key : listKeyToFind) {
+            findKeyInText(lp, stringBuilder, key);
         }
     }
 
-    private void findNameInText(LinesPacket lp, StringBuilder stringBuilder, String name) {
-        for (int i = -1; (i = stringBuilder.indexOf(name, i + 1)) != -1; i++) {
-            nameLocationHashMap.put(name,new NameLocation(lp.lineOffset,i));
+    private void findKeyInText(LinesPacket lp, StringBuilder stringBuilder, String key) {
+        for (int i = -1; (i = stringBuilder.indexOf(key, i + 1)) != -1; i++) {
+            keyLocationMap.put(key,new KeyLocation(lp.lineOffset,i));
         }
     }
 }

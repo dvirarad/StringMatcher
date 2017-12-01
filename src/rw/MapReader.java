@@ -3,7 +3,7 @@ package rw;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import configuration.Globals;
-import logic.NameLocation;
+import logic.KeyLocation;
 
 import java.io.*;
 
@@ -12,7 +12,7 @@ import java.io.*;
  */
 public class MapReader {
 
-    Multimap<String, NameLocation> nameLocationMap;
+    Multimap<String, KeyLocation> nameLocationMap;
     BufferedReader br = null;
     FileReader fr = null;
 
@@ -51,7 +51,7 @@ public class MapReader {
     }
 
     /**
-     * Deserialization line into <String,NameLocation> entity
+     * Deserialization line into <String,KeyLocation> entity
      * @param line - one line from file
      */
     public void parseLine(String line) {
@@ -63,15 +63,15 @@ public class MapReader {
     }
 
     /**
-     * Add new NameLocation into Key value at Map
+     * Add new KeyLocation into Key value at Map
      * @param key
      * @param nameLocationAsStringArray
      */
     public void updateMap(String key, String[] nameLocationAsStringArray) {
         for (String nameLocationString : nameLocationAsStringArray) {
             nameLocationString = cleanNameLocationString(nameLocationString);
-            NameLocation nameLocation = getNameLocation(nameLocationString);
-            nameLocationMap.put(key,nameLocation);
+            KeyLocation keyLocation = getNameLocation(nameLocationString);
+            nameLocationMap.put(key, keyLocation);
         }
     }
 
@@ -82,20 +82,20 @@ public class MapReader {
     }
 
     /**
-     * parse String into NameLocation object
+     * parse String into KeyLocation object
      * @param nameLocationString String to parse
-     * @return  NameLocation object
+     * @return  KeyLocation object
      */
-    public NameLocation getNameLocation(String nameLocationString) {
+    public KeyLocation getNameLocation(String nameLocationString) {
         String[] nameLocationArray = nameLocationString.split(Globals.NAME_LOCATION_SEPARATOR);
         String[] arrLineOffset=nameLocationArray[0].split("=");
         String[] arrCharOffset=nameLocationArray[1].split("=");;
         int lineOffset = Integer.valueOf(arrLineOffset[1].trim());
         int charOffset = Integer.valueOf(arrCharOffset[1].trim());
-        return new NameLocation(lineOffset,charOffset);
+        return new KeyLocation(lineOffset,charOffset);
     }
 
-    public Multimap<String, NameLocation> getNameLocationMap() {
+    public Multimap<String, KeyLocation> getKeyLocationMap() {
         return nameLocationMap;
     }
 

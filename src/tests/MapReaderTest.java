@@ -1,6 +1,6 @@
 package tests;
 
-import logic.NameLocation;
+import logic.KeyLocation;
 import org.junit.Before;
 import org.junit.Test;
 import rw.MapReader;
@@ -21,15 +21,15 @@ public class MapReaderTest {
     public void testParseLineMapSize(){
         String line = "John-->[[lineOffset=13000,charOffset=1755], [lineOffset=13000,charOffset=7741], [lineOffset=13000,charOffset=10844]\n";
         mapReader.parseLine(line);
-        assert mapReader.getNameLocationMap().get("John").size() == 3;
+        assert mapReader.getKeyLocationMap().get("John").size() == 3;
     }
 
     @Test
     public void testParseLineMapInfo(){
         String line = "John-->[[lineOffset=13000,charOffset=1755]\n";
         mapReader.parseLine(line);
-         NameLocation nameLocation = (NameLocation) mapReader.getNameLocationMap().get("John").toArray()[0];
-         assert nameLocation.getLineOffset() == 13000;
-         assert nameLocation.getCharOffset() == 1755;
+         KeyLocation keyLocation = (KeyLocation) mapReader.getKeyLocationMap().get("John").toArray()[0];
+         assert keyLocation.getLineOffset() == 13000;
+         assert keyLocation.getCharOffset() == 1755;
     }
 }
