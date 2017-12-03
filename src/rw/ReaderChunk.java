@@ -60,8 +60,9 @@ private int defaultChunkSize;
                stringBuilder.append(inputLine);
                 linesCounter++;
                 isFirstLine=false;
-                lp = new LinesPacket(stringBuilder, linesCounter-this.defaultChunkSize);
             }
+            lp = new LinesPacket(stringBuilder, linesCounter-this.defaultChunkSize);
+
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
